@@ -1,12 +1,14 @@
 package com.framework.keywords;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Properties;
 
-public class ApplicationKeywords extends ValidationKeywords {
+public class ReadProperties {
 	
-	public ApplicationKeywords(){
-        Properties prop = new Properties();
+	public static void main(String ar[]) {
+		Properties prop = new Properties();
+		
 		try {
 			FileInputStream fs = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\Object.properties");
 			prop.load(fs);
@@ -14,14 +16,9 @@ public class ApplicationKeywords extends ValidationKeywords {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(prop.getProperty("browser_name"));
+		System.out.println(prop.getProperty("new_user"));
+		System.out.println(prop.getProperty("password"));
 	}
-
-    public void login(){
-        // Code to perform login action
-    }
-    public void selectDate(){
-        // Code to select a date from a date picker
-    }
-
 
 }

@@ -1,5 +1,9 @@
 package com.framework.keywords;
 
+import org.testng.*;
+
+
+
 
 
 public class ValidationKeywords extends GenericKeywords {
@@ -9,6 +13,8 @@ public class ValidationKeywords extends GenericKeywords {
     }
     public void validateTitle(String expectedTitle) {
         // Code to validate that the current page title matches the expected title
+    	Assert.assertEquals(driver.getTitle(), expectedTitle, "Page title matched!");
+
     }
     public void validateElementIsDisplayed(String element) {
         // Code to validate that the specified element is displayed on the page
