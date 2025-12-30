@@ -1,1 +1,5 @@
 /target/
+drivers/
+screenshots/
+test-output/
+.classpath
