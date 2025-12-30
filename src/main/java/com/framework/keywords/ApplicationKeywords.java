@@ -6,7 +6,7 @@ import java.util.Properties;
 public class ApplicationKeywords extends ValidationKeywords {
 	
 	public ApplicationKeywords(){
-        Properties prop = new Properties();
+        prop = new Properties();
 		try {
 			FileInputStream fs = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\Object.properties");
 			prop.load(fs);

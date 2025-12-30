@@ -14,19 +14,12 @@ public class automateNowLoginTest extends ApplicationKeywords {
 		aK.open("URL");
 		aK.takeScreenshot("loginTest");
 		aK.validateTitle("DEMOQA");
-		aK.click("new_user");
-		aK.waitForelementToBePresent(By.id("register"), 10);
+		aK.click("newUser_xpath");
 		aK.set("firstName_id", "Souradip");
-		aK.pause(10);
 		aK.set("lastName_id", "Nath");
-		aK.pause(10);
 		aK.set("userName_id", "Lapis05");
-		aK.pause(10);
-		aK.set("password", "Lapis@1234");
-		aK.pause(10);
+		aK.set("password_id", "Lapis@1234");
 		aK.click("register_id");
-		aK.pause(10);
-		
 		aK.takeScreenshot("loginTest");
 		
 		
