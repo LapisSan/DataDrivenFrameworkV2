@@ -72,65 +72,66 @@ public class GenericKeywords {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 	}
-	
+
 	public void open(String urlKey) {
 		// Code to navigate to the specified URL
 		driver.get(prop.getProperty(urlKey));
 	}
-	
+
 	public By getLocator(String locatorKey) {
-		By by =null;
-		if(locatorKey.endsWith("_id"))
+		By by = null;
+		if (locatorKey.endsWith("_id"))
 			by = By.id(prop.getProperty(locatorKey));
-		else if(locatorKey.endsWith("_xpath"))
+		else if (locatorKey.endsWith("_xpath"))
 			by = By.xpath(prop.getProperty(locatorKey));
-		else if(locatorKey.endsWith("_parLinkText"))
+		else if (locatorKey.endsWith("_parLinkText"))
 			by = By.partialLinkText(prop.getProperty(locatorKey));
-		else if(locatorKey.endsWith("_linktext"))
+		else if (locatorKey.endsWith("_linktext"))
 			by = By.linkText(prop.getProperty(locatorKey));
-		else if(locatorKey.endsWith("_name"))
+		else if (locatorKey.endsWith("_name"))
 			by = By.name(prop.getProperty(locatorKey));
-		else if(locatorKey.endsWith("_css"))
+		else if (locatorKey.endsWith("_css"))
 			by = By.cssSelector(prop.getProperty(locatorKey));
-		else if(locatorKey.endsWith("_tagName"))
+		else if (locatorKey.endsWith("_tagName"))
 			by = By.tagName(prop.getProperty(locatorKey));
 		return by;
 	}
-	
+
 	public WebElement getElement(String locatorKey) {
-		if(!isElementPresent(locatorKey)) 
-			System.out.println("❌ Failed to find element"+locatorKey);
-		if(!isElementVisible(locatorKey))
-			System.out.println("❌ Element is not visible"+locatorKey);
-		 element = driver.findElement(getLocator(locatorKey));
+		if (!isElementPresent(locatorKey))
+			System.out.println("❌ Failed to find element" + locatorKey);
+		if (!isElementVisible(locatorKey))
+			System.out.println("❌ Element is not visible" + locatorKey);
+		element = driver.findElement(getLocator(locatorKey));
 		return element;
 	}
+
 	public List<WebElement> getElements(String locatorKey) {
 		List<WebElement> element = driver.findElements(getLocator(locatorKey));
 		return element;
 	}
+
 	public boolean isElementPresent(String locatorKey) {
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(60));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated(getLocator(locatorKey)));
-		}catch(Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;	
-	}
-	public boolean isElementVisible(String locatorKey) {
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(60));
-		try {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(getLocator(locatorKey)));
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 		return true;
 	}
 
-	
+	public boolean isElementVisible(String locatorKey) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(getLocator(locatorKey)));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
 	public void wait(int seconds) {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
@@ -143,15 +144,16 @@ public class GenericKeywords {
 			e.printStackTrace();
 		}
 	}
+
 	// Code to click on the specified element
 	public void click(String locatorKey) {
 		// Code to click on the specified element
 		// driver.findElement(By.xpath(locator)).click();
-		//By locator = By.xpath(prop.getProperty(locatorKey));
-		//By locator = getLocator(locatorKey);
+		// By locator = By.xpath(prop.getProperty(locatorKey));
+		// By locator = getLocator(locatorKey);
 		getElement(locatorKey);
 		try {
-			//element = waitForelementToBePresent(locator, 10);
+			// element = waitForelementToBePresent(locator, 10);
 			element.click();
 			System.out.println("✅ Successfully clicked on element:" + locatorKey);
 		} catch (Exception e) {
@@ -161,11 +163,11 @@ public class GenericKeywords {
 
 	public void set(String locatorKey, String text) {
 		// Code to enter text into the specified element
-		//By locator = getLocator(locatorKey);
-		//element = driver.findElement(locator);
+		// By locator = getLocator(locatorKey);
+		// element = driver.findElement(locator);
 		getElement(locatorKey);
 		try {
-			//element = waitForelementToBePresent(locator, 10);
+			// element = waitForelementToBePresent(locator, 10);
 			element.sendKeys(text);
 			System.out.println("✅ Successfully set text: '" + text + "' in element: " + locatorKey);
 		} catch (Exception e) {
@@ -184,17 +186,18 @@ public class GenericKeywords {
 	public void refreshPage() {
 		// Code to refresh the current page
 	}
+
 	// Code to wait for the specified element to be present
 	public void waitForelementToBePresent(String locatorKey, int timeOutInSeconds) {
 		By locator = getLocator(locatorKey);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOutInSeconds));
 		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("❌ Failed to find element: "+locatorKey);
+			System.out.println("❌ Failed to find element: " + locatorKey);
 		}
-		
+
 	}
 
 	public void verifyElementPresent(String element) {

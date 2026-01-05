@@ -3,7 +3,6 @@ package com.framework.testCases;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-
 import com.framework.keywords.ApplicationKeywords;
 
 public class automateNowLoginTest extends ApplicationKeywords {
@@ -21,9 +20,7 @@ public class automateNowLoginTest extends ApplicationKeywords {
 		aK.set("password_id", "Lapis@1234");
 		aK.click("register_id");
 		aK.takeScreenshot("loginTest");
-		
-		
-		
+
 		aK.quiteBrowser();
 	}
 
