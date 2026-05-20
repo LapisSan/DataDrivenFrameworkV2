@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -40,30 +41,14 @@ public class GenericKeywords {
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--start-maximized", "--disable-infobars");
 			options.addArguments("--disable-extensions");
-
-			options.addArguments("--incognito");
-			options.addArguments("--disable-notifications");
-			options.addArguments("ignore-certificate-errors");
-
 			driver = new ChromeDriver(options);
 		} else if (browserName.equalsIgnoreCase("firefox")) {
-			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/geckodriver.exe");
+			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/drivers/geckodriver.exe");
 			FirefoxOptions options = new FirefoxOptions();
-
-			ProfilesIni profiles = new ProfilesIni();
-			FirefoxProfile ffprofile = profiles.getProfile("TestUser");
-
-			ffprofile.setPreference("dom.webnotifications.enabled", false);
-			ffprofile.setAcceptUntrustedCertificates(true);
-			ffprofile.setAssumeUntrustedCertificateIssuer(false);
-
-			options.setProfile(ffprofile);
 			driver = new FirefoxDriver(options);
 		} else if (browserName.equalsIgnoreCase("edge")) {
-			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/msedgedriver.exe");
+			System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/drivers/msedgedriver.exe");
 			driver = new EdgeDriver();
-		} else if (browserName.equalsIgnoreCase("safari")) {
-			driver = new SafariDriver();
 		} else {
 			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "drivers/chromedriver.exe");
 			driver = new ChromeDriver();
@@ -203,6 +188,11 @@ public class GenericKeywords {
 	public void verifyElementPresent(String element) {
 		// Code to verify that the specified element is present on the page
 	}
+	
+	public void scrollDown() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,500)");
+	}
 
 	public void takeScreenshot(String fileName) {
 		// Code to take a screenshot and save it with the specified file name
@@ -244,6 +234,7 @@ public class GenericKeywords {
 
 	public void quiteBrowser() {
 		// Code to close the browser
+		if(driver != null)
 		driver.quit();
 	}
 
